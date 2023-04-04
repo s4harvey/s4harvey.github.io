@@ -33,10 +33,11 @@ header .logoPlaceholder span {
 	line-height: 53px;
 }
 header .profilePhoto {
-	background-color: rgba(237,237,237,1.00);
-	width: 259px;
+	padding-top: 5%;
+	background-color: rgba(255,255,255,1.00);
+	width: 216px;
 	border-radius: 50%;
-	height: 259px;
+	height: 216px;
 	clear: both;
 }
 header .profileHeader h1 {
@@ -45,6 +46,7 @@ header .profileHeader h1 {
 	font-size: 30px;
 	font-weight: 700;
 	line-height: 24px;
+	margin-left: 26%;
 }
 header .profileHeader sub {
 	font-family: sans-serif;
@@ -52,6 +54,7 @@ header .profileHeader sub {
 	font-size: 14px;
 	font-weight: 300;
 	line-height: 24px;
+	margin-left: 26%;
 }
 hr {
 	background-color: rgba(208,207,207,1.00);
@@ -69,6 +72,7 @@ header .socialNetworkNavBar {
 	height: 30px;
 	margin-top: 0px;
 	margin-bottom: 20px;
+	margin-left: 26%;
 }
 header .socialNetworkNavBar .socialNetworkNav {
 	width: 30px;
@@ -76,6 +80,7 @@ header .socialNetworkNavBar .socialNetworkNav {
 	margin-right: 5px;
 	cursor: pointer;
 	display: inline-block;
+	margin-left: 26%;
 }
 header .socialNetworkNavBar .socialNetworkNav img:hover {
 	opacity: 0.5;
