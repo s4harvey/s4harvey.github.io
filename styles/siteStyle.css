@@ -54,7 +54,6 @@ header .profileHeader sub {
 	font-size: 14px;
 	font-weight: 300;
 	line-height: 24px;
-	margin-left: 26%;
 }
 hr {
 	background-color: rgba(208,207,207,1.00);
@@ -67,6 +66,7 @@ header .profileHeader p {
 	font-weight: 400;
 	line-height: 1.8;
 	overflow-y: auto;
+	margin-left: 26%;
 }
 header .socialNetworkNavBar {
 	height: 30px;
@@ -80,7 +80,6 @@ header .socialNetworkNavBar .socialNetworkNav {
 	margin-right: 5px;
 	cursor: pointer;
 	display: inline-block;
-	margin-left: 26%;
 }
 header .socialNetworkNavBar .socialNetworkNav img:hover {
 	opacity: 0.5;
