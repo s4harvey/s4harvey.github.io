@@ -1,0 +1,17 @@
+name: "my-website"
+navbar:
+  title: "Aphasia Measures"
+  type: inverse
+  left:
+    - text: "Overview"
+      icon: fa-square-h
+      href: index.html
+    - text: "Participant data"
+      icon: fa-solid fa-bed
+      href: patient.html
+    - text: "Flags"
+      icon: fa-solid fa-flag
+      href: flags.html
+    - text: "Clinician data"
+      icon: fa-solid fa-house-chimney-medical
+      href: clinician.html

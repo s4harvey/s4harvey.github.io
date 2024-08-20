@@ -1,0 +1,234 @@
+---
+title: "&#32;"
+output:
+  html_document:
+    css: "styles.css"
+    theme: "lumen"
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+# Environment set up
+knitr::opts_chunk$set(echo=FALSE)
+
+library(DT)
+library(dplyr)
+library(here)
+library(fontawesome)
+
+screening_data <- read.csv(here("Data", "screening_data.csv"))
+patient_data <- read.csv(here("Data", "patient_data.csv"))
+
+screening_data <- screening_data %>% mutate(screen_hospital = ifelse(screen_hospital == 1, "Royal Brisbane and Women's Hospital", ifelse(screen_hospital == 2, "Surgical, Treatment and Rehabilitation Service", ifelse(screen_hospital ==3, "Brighton Rehabilitation Unit", ifelse(screen_hospital == 4, "Caboolture Hospital", ifelse(screen_hospital ==5, "Redcliffe Hospital", ifelse(screen_hospital==6, "St Vincent's Hospital Melbourne - Acute Fitzroy", ifelse(screen_hospital==7, "St Vincent's Hospital Melbourne - Rehab Fitzroy", ifelse(screen_hospital ==8, "St Vincent's Hospital Melbourne - Rehab SGHS", ifelse(screen_hospital==9, "Monash Medical Centre", ifelse(screen_hospital==10, "Kingston Centre", ifelse(screen_hospital ==11, "Sir Charles Gairdner Hospital", ifelse(screen_hospital==12, "Osborne Park Hospital", ifelse(screen_hospital ==13, "Fiona Stanley Hospital",ifelse(screen_hospital==14, "Fremantle Hospital",ifelse(screen_hospital==15, "Casey Hospital",ifelse(screen_hospital==16, "SVHM - Rehab@Home", NA)))))))))))))))))
+
+patient_data <- patient_data %>% mutate(admhospital = ifelse(admhospital == 1, "Royal Brisbane and Women's Hospital", ifelse(admhospital == 2, "Surgical, Treatment and Rehabilitation Service", ifelse(admhospital == 3, "Brighton Rehabilitation Unit", ifelse(admhospital == 4, "Caboolture Hospital", ifelse(admhospital == 5, "Redcliffe Hospital", ifelse(admhospital == 6, "St Vincent's Hospital Melbourne - Acute", ifelse(admhospital == 7, "St Vincent's Hospital Melbourne - Rehab Fitzroy", ifelse(admhospital == 8, "St Vincent's Hospital Melbourne - Rehab SGHS", ifelse(admhospital == 9, "Monash Medical Centre", ifelse(admhospital == 10, "Kingston Centre", ifelse(admhospital == 11, "Sir Charles Gairdner Hospital", ifelse(admhospital == 12, "Osborne Park Hospital", ifelse(admhospital == 13, "Fiona Stanley Hospital",ifelse(admhospital == 14, "Fremantle Hospital",ifelse(admhospital == 15, "STARS Day Hospital",ifelse(admhospital == 16, "Casey Hospital",ifelse(admhospital == 17, "SVHM - Rehab@Home", NA)))))))))))))))))) %>% mutate(redcap_event_name = ifelse(redcap_event_name == "inpatient_acute_arm_1","Acute",ifelse(redcap_event_name == "inpatient_rehabsub_arm_1","Rehab","Community"))) %>% filter(grepl('-',participant_id))
+
+# Organsie outcome measures data
+measures_data <- patient_data %>% 
+  mutate(
+    wabr_base_aq = round(wabr_base_aq, 1),  # Round to one decimal place
+    wabr_post_aq = round(wabr_post_aq, 1),  # Round to one decimal place
+    ptanchor_lang_q1 = ifelse(ptanchor_lang_q1 == -2, "Much worse", 
+                      ifelse(ptanchor_lang_q1 == -1, "Slightly worse", 
+                      ifelse(ptanchor_lang_q1 == 0, "No change", 
+                      ifelse(ptanchor_lang_q1 == 1, "Slightly improved", 
+                      ifelse(ptanchor_lang_q1 == 2, "Much improved", 
+                      ifelse(ptanchor_lang_q1 == 3, "Completely recovered", NA)))))),
+    ptanchor_comm_q1 = ifelse(ptanchor_comm_q1 == -2, "Much worse", 
+                      ifelse(ptanchor_comm_q1 == -1, "Slightly worse", 
+                      ifelse(ptanchor_comm_q1 == 0, "No change", 
+                      ifelse(ptanchor_comm_q1 == 1, "Slightly improved", 
+                      ifelse(ptanchor_comm_q1 == 2, "Much improved", 
+                      ifelse(ptanchor_comm_q1 == 3, "Completely recovered", NA)))))),
+    ptanchor_qol_q1 = ifelse(ptanchor_qol_q1 == -2, "Much worse", 
+                      ifelse(ptanchor_qol_q1 == -1, "Slightly worse", 
+                      ifelse(ptanchor_qol_q1 == 0, "No change", 
+                      ifelse(ptanchor_qol_q1 == 1, "Slightly improved", 
+                      ifelse(ptanchor_qol_q1 == 2, "Much improved", 
+                      ifelse(ptanchor_qol_q1 == 3, "Completely recovered", NA)))))),
+    ptanchor_ewb_q1 = ifelse(ptanchor_ewb_q1 == -2, "Much worse", 
+                      ifelse(ptanchor_ewb_q1 == -1, "Slightly worse", 
+                      ifelse(ptanchor_ewb_q1 == 0, "No change", 
+                      ifelse(ptanchor_ewb_q1 == 1, "Slightly improved", 
+                      ifelse(ptanchor_ewb_q1 == 2, "Much improved", 
+                      ifelse(ptanchor_ewb_q1 == 3, "Completely recovered", NA)))))),
+    ptanchor_lang_q2 = ifelse(ptanchor_lang_q2 == 1, "Yes", "No"), # Was this an important change?
+    ptanchor_comm_q2 = ifelse(ptanchor_comm_q2 == 1, "Yes", "No"),
+    ptanchor_qol_q2 = ifelse(ptanchor_qol_q2 == 1, "Yes", "No"),    
+    ptanchor_ewb_q2 = ifelse(ptanchor_ewb_q2 == 1, "Yes", "No")
+  ) %>%
+  filter(
+    wabr_base_comp == 1 |
+    wabr_post_comp == 1 |
+    ptanchor_lang_comp == 1 |
+    scenario_base_comp == 1 |
+    scenario_post_comp == 1 |
+    ptanchor_comm_comp == 1 |
+    saqol_base_comp == 1 |
+    saqol_post_comp == 1 |
+    ptanchor_qol_comp == 1 |
+    ghq12_base_comp == 1 |
+    ghq12_post_comp == 1 |
+    ptanchor_ewb_comp == 1
+  ) %>%
+  rowwise() %>%  # Apply operations row by row
+  mutate( # count the number of non NA cells in each row for numeric and character data types. Only the row for each participant with the most data is included
+    non_missing_numeric = sum(!is.na(c_across(c(
+      wabr_base_aq, wabr_post_aq, scenario_base_rawscore, 
+      scenario_base_percentile, scenario_post_rawscore, 
+      scenario_post_percentile, saqol_base_mean, 
+      saqol_post_mean, ghq12_base_totalscore, ghq12_post_totalscore)))),
+    non_missing_character = sum(!is.na(c_across(c(
+      ptanchor_lang_q1, ptanchor_lang_q2, ptanchor_comm_q1, 
+      ptanchor_comm_q2, ptanchor_qol_q1, ptanchor_qol_q2, 
+      ptanchor_ewb_q1, ptanchor_ewb_q2))))
+  ) %>%
+  mutate(non_missing_count = non_missing_numeric + non_missing_character) %>%  # Combine both counts
+  ungroup() %>%  # Ungroup after rowwise operations
+  group_by(participant_id) %>%  # Group by participant_id
+  filter(non_missing_count == max(non_missing_count)) %>%  # Select rows with the most non-missing values
+  ungroup() %>%  # Ungroup to return to a flat dataframe
+  mutate(
+    wabr_change = wabr_post_aq - wabr_base_aq,                # Calculate change in WABR
+    scenario_change = scenario_post_rawscore - scenario_base_rawscore, # Calculate change in scenario score
+    saqol_mean_change = saqol_post_mean - saqol_base_mean,    # Calculate change in SAQOL mean score
+    ghq12_change = ghq12_post_totalscore - ghq12_base_totalscore  # Calculate change in GHQ12 total score
+  ) %>%
+  mutate(
+    wabr_change = round(wabr_change, 1)
+  ) %>%
+  select(
+    participant_id, admhospital, age, sex, education, lang_primary_spoken, history_stroke,
+    wabr_base_aq, wabr_post_aq, wabr_change, ptanchor_lang_q1, ptanchor_lang_q2, 
+    scenario_base_rawscore, scenario_base_percentile, scenario_post_rawscore, scenario_change, scenario_post_percentile, ptanchor_comm_q1, ptanchor_comm_q2, 
+    saqol_base_mean, saqol_post_mean, saqol_mean_change, ptanchor_qol_q1, ptanchor_qol_q2, 
+    ghq12_base_totalscore, ghq12_post_totalscore, ghq12_change, ptanchor_ewb_q1, ptanchor_ewb_q2
+  )
+
+
+
+
+```
+
+<div style="text-align:right; font-size: 12px; color: gray;">
+  Report generated on `r format(Sys.Date(), "%d %B %Y")`
+</div>
+
+## Participant data {.tabset .tabset-fade}
+\
+
+### Demographics
+\
+
+```{r, warning=FALSE, echo=FALSE}
+
+demog_data <- measures_data %>% select("participant_id", "admhospital","age","sex","education",
+                             "lang_primary_spoken", "history_stroke")
+
+colnames(demog_data) <- c("Participant ID", "Hospital", "Age", "Sex", "Education", "Language", "Stroke History")
+demog_data <- demog_data %>% mutate(Sex = ifelse(Sex == 1, "Male", ifelse(Sex ==2, "Female", "Other"))) %>% mutate(`Stroke History` = ifelse(`Stroke History` == 1, "Yes", ifelse(`Stroke History` ==2, "No", "Unknown")))
+
+datatable(demog_data, caption = paste("Last updated: ",format(Sys.Date(), "%d-%m-%Y")), 
+          rownames=FALSE,extensions = "Buttons",
+          options = list(initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});","}"),
+    columnDefs =list(list(className = 'dt-center', targets="_all")), 
+                     pageLength =25 ,dom = 'lfrtBip', buttons = c('csv', 'excel', 'pdf'), 
+                     lengthMenu =list(c(25,50,100,-1), c("25","50","100","ALL")) ,autoWidth = TRUE)) 
+
+```
+
+### Language outcomes
+\
+
+```{r, warning=FALSE, echo=FALSE}
+
+
+
+lang_outcomes <- measures_data %>% select("participant_id", "admhospital","wabr_base_aq","wabr_post_aq","wabr_change","ptanchor_lang_q1",
+                                   "ptanchor_lang_q2")%>% rowwise()%>%
+  filter(!all(is.na(across(all_of(c("admhospital","wabr_base_aq",
+                                   "wabr_post_aq","wabr_change","ptanchor_lang_q1","ptanchor_lang_q2"))))))
+
+colnames(lang_outcomes) <- c("Participant ID", "Hospital", "Pre WAB-AQ", "Post WAB-AQ", "WAB-AQ change", "Patient anchor rating", "Important change")
+
+datatable(lang_outcomes, caption = paste("Last updated: ",format(Sys.Date(), "%d-%m-%Y")), 
+          rownames=FALSE,extensions = "Buttons",
+          options = list(initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});","}"),
+    columnDefs =list(list(className = 'dt-center', targets="_all"),
+                     list(width = '160px', targets = 'Hospital')), 
+                     pageLength =25 ,dom = 'lfrtBip', buttons = c('csv', 'excel', 'pdf'), 
+                     lengthMenu =list(c(25,50,100,-1), c("25","50","100","ALL")) ,autoWidth = TRUE)) 
+
+```
+
+### Communication outcomes
+\
+
+```{r, warning=FALSE, echo=FALSE}
+
+comm_outcomes <- measures_data %>%
+  select("participant_id", "admhospital","scenario_base_rawscore","scenario_base_percentile",
+                                   "scenario_post_rawscore","scenario_post_percentile", "scenario_change","ptanchor_comm_q1","ptanchor_comm_q2")%>% rowwise()%>%
+  filter(!all(is.na(across(all_of(c("admhospital","scenario_base_rawscore","scenario_base_percentile",
+                                   "scenario_post_rawscore","scenario_post_percentile", "scenario_change","ptanchor_comm_q1","ptanchor_comm_q2"))))))
+
+colnames(comm_outcomes) <- c("Participant ID", "Hospital", "Pre Scenario Test", "%ile","Post Scenario Test", "%ile", "Raw score change", "Patient anchor rating", "Important change")
+
+datatable(comm_outcomes, caption = paste("Last updated: ",format(Sys.Date(), "%d-%m-%Y")), 
+          rownames=FALSE,extensions = "Buttons",
+          options = list(initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});","}"),
+    columnDefs =list(list(className = 'dt-center', targets="_all"),
+                     list(width = '160px', targets = 'Hospital')), 
+                     pageLength =25 ,dom = 'lfrtBip', buttons = c('csv', 'excel', 'pdf'), 
+                     lengthMenu =list(c(25,50,100,-1), c("25","50","100","ALL")) ,autoWidth = TRUE)) 
+
+```
+
+### Wellbeing outcomes
+\
+
+```{r, warning=FALSE, echo=FALSE}
+
+ewb_data <- measures_data %>% 
+  select("participant_id", "admhospital","ghq12_base_totalscore","ghq12_post_totalscore","ptanchor_ewb_q1","ptanchor_ewb_q2")%>% 
+  rowwise() %>% filter(!all(is.na(across(all_of(c("admhospital","ghq12_base_totalscore","ghq12_post_totalscore","ptanchor_ewb_q1","ptanchor_ewb_q2"))))))
+
+colnames(ewb_data) <- c("Participant ID", "Hospital", "Pre GHQ-12", "Post GHQ-12", "Patient anchor rating", "Important change")
+
+datatable(ewb_data, caption = paste("Last updated: ",format(Sys.Date(), "%d-%m-%Y")), 
+          rownames=FALSE,extensions = "Buttons",
+          options = list(initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});","}"),
+    columnDefs =list(list(className = 'dt-center', targets="_all"),
+                     list(width = '160px', targets = 'Hospital')), 
+                     pageLength =25 ,dom = 'lfrtBip', buttons = c('csv', 'excel', 'pdf'), 
+                     lengthMenu =list(c(25,50,100,-1), c("25","50","100","ALL")) ,autoWidth = TRUE)) 
+
+```
+
+### QOL outcomes
+\
+
+```{r, warning=FALSE, echo=FALSE}
+
+qol_data <- measures_data %>% select("participant_id", "admhospital","saqol_base_mean","saqol_post_mean",
+                              "ptanchor_qol_q1","ptanchor_qol_q2") %>% rowwise() %>%
+  filter(!all(is.na(across(all_of(c("admhospital","saqol_base_mean","saqol_post_mean",
+                              "ptanchor_qol_q1","ptanchor_qol_q2"))))))
+
+colnames(qol_data) <- c("Participant ID", "Hospital", "Pre SAQOL mean", "Post SAQOL mean", "Patient anchor rating", "Important change")
+
+datatable(qol_data, caption = paste("Last updated: ",format(Sys.Date(), "%d-%m-%Y")), 
+          rownames=FALSE,extensions = "Buttons",
+          options = list(initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});","}"),
+    columnDefs =list(list(className = 'dt-center', targets="_all"),
+                     list(width = '160px', targets = 'Hospital')), 
+                     pageLength =25 ,dom = 'lfrtBip', buttons = c('csv', 'excel', 'pdf'), 
+                     lengthMenu =list(c(25,50,100,-1), c("25","50","100","ALL")) ,autoWidth = TRUE)) 
+
+```
+

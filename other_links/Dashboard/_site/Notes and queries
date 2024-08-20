@@ -1,0 +1,33 @@
+Dashboard update notes 5/8/24
+
+Index rmd
+
+  1. Add summary table - DONE
+  
+  2. Add sites: lines 21, 23, 33, 41-222, 255-, 296- - DONE
+  
+  3. Ensure recruited and active figures are different - a single participant can have both acute and subacute admissions eg. participants who are admitted to more than one site should only be counted once.
+  
+  4. Some sites not tallying accurately: eg. FSH acute/rehab 
+  
+  5 Sites section
+   - Remove tablets
+   - add screening ID, QIs, treatment, anchors, exp survey, d/c, end of study as tabs on the verification table
+  
+  6 Chart recruitment by month/site
+  
+Clincian.rmd
+
+1. Unique participants - done
+1. Unique completed participants, total instruments - done
+
+Flags
+
+1. bring to index under sites?
+  
+  
+Live data dictionaries
+
+  SCREENING: 
+  1. STARS Day Hospital not listed as an admhospital - emailed CB 14/8
+  2. 

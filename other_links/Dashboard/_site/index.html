@@ -1,0 +1,4228 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> </title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.33/datatables.js"></script>
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-grid-3.4.1/bootstrap-grid.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Aphasia Measures</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-square-h"></span>
+     
+    Overview
+  </a>
+</li>
+<li>
+  <a href="patient.html">
+    <span class="fa fa-solid fa-bed"></span>
+     
+    Participant data
+  </a>
+</li>
+<li>
+  <a href="flags.html">
+    <span class="fa fa-solid fa-flag"></span>
+     
+    Flags
+  </a>
+</li>
+<li>
+  <a href="clinician.html">
+    <span class="fa fa-solid fa-house-chimney-medical"></span>
+     
+    Clinician data
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"> </h1>
+
+</div>
+
+
+<div style="text-align:right; font-size: 12px; color: gray;">
+<p>Report generated on 20 August 2024</p>
+</div>
+<div id="recruitment-summary" class="section level1">
+<h1>Recruitment summary</h1>
+<!-- Display screened, recruited and completed participants summary cards -->
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+147
+</h1>
+<div class="number-card-dollars">
+Participants screened
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+44
+</h1>
+<div class="number-card-dollars">
+Participants recruited
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content3" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+22
+</h1>
+<div class="number-card-dollars">
+Completed study
+</div>
+</div>
+</div>
+</div>
+<p><img src="index_files/figure-html/recruitmentPlots-1.png" width="960" /></p>
+</div>
+<hr>
+</div>
+<div id="data-collection-summary" class="section level1">
+<h1>Data collection summary</h1>
+<!-- Display the number of completed COS measures, anchors and patient experience questionnaires across all sites -->
+<div class="row w-row">
+<!-- Pre cos -->
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<div class="number-card-dollars">
+Core outcomes
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+<strong>Outcome</strong><br>WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+<strong>Pre | Post</strong><br>24 | 9<br>14 | 7<br>18 | 7<br>19 | 9
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Clinician anchors -->
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<div class="number-card-dollars">
+Anchors
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+<strong>Construct</strong><br>Language<br>Communication<br>QoL<br>Wellbeing
+</div>
+<div class="number-card-progress">
+<strong>Clinician | Patient</strong><br>9 | 5<br>9 | 4<br>9 | 5<br>9 | 5
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Experience survey -->
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+2
+</h1>
+<div class="number-card-dollars">
+Experience surveys
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="sites" class="section level1 tabset tabset-fade tabset-pills">
+<h1 class="tabset tabset-fade tabset-pills">Sites</h1>
+<div id="queensland" class="section level2 tabset tabset-fade">
+<h2 class="tabset tabset-fade">Queensland</h2>
+<div id="rbwh" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">RBWH</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+8
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-cos" class="section level4">
+<h4>Pre-treatment COS</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Acute"/>
+<span>Acute</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Acute": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedData2c77f0f1"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedData2c77f0f1"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedData2c77f0f1"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedData2c77f0f1"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedData2c77f0f1"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e11000922b4fc56bec64" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e11000922b4fc56bec64">{"x":{"crosstalkOptions":{"key":["1","2","3","4","5","6","7","8"],"group":"SharedData2c77f0f1"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-3","21986-4","21986-6","21986-17","21986-19","21986-21","21986-22","21986-23"],["Acute","Acute","Acute","Acute","Acute","Acute","Acute","Acute"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-cos" class="section level4">
+<h4>Post-treatment COS</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Acute"/>
+<span>Acute</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Acute": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedDatae1100092"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedDatae1100092"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedDatae1100092"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedDatae1100092"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7", "8"]
+  },
+  "group": ["SharedDatae1100092"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-af51e2de58256d1d86a9" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-af51e2de58256d1d86a9">{"x":{"crosstalkOptions":{"key":["1","2","3","4","5","6","7","8"],"group":"SharedDatae1100092"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-3","21986-4","21986-6","21986-17","21986-19","21986-21","21986-22","21986-23"],["Acute","Acute","Acute","Acute","Acute","Acute","Acute","Acute"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="caboolture" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Caboolture</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+0
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-123b790bdf3a474901a7" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-123b790bdf3a474901a7">{"x":{"crosstalkOptions":{"key":[],"group":"SharedData2b4fc56b"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+<div id="post-treatment-data" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-56c836fb3bafa86d25a3" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-56c836fb3bafa86d25a3">{"x":{"crosstalkOptions":{"key":[],"group":"SharedDataec64af51"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="stars" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">STARS</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+19
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+4
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+12<br>8<br>9<br>10
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+1
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+3<br>3<br>2<br>3
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-1" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]
+  },
+  "group": ["SharedDatae2de5825"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Complete": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]
+  },
+  "group": ["SharedDatae2de5825"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Complete": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "18"],
+    "Incomplete": ["17", "19"]
+  },
+  "group": ["SharedDatae2de5825"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Complete": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"],
+    "Incomplete": ["19"]
+  },
+  "group": ["SharedDatae2de5825"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Complete": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"],
+    "Incomplete": ["19"]
+  },
+  "group": ["SharedDatae2de5825"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-066f30059ddba2f8b8ef" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-066f30059ddba2f8b8ef">{"x":{"crosstalkOptions":{"key":["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19"],"group":"SharedDatae2de5825"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-1","21986-2","21986-3","21986-4","21986-7","21986-8","21986-9","21986-10","21986-11","21986-13","21986-15","21986-17","21986-19","21986-20","21986-21","21986-22","21986-24","21986-25","21986-27"],["Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab"],["Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete"],["Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Incomplete","Complete","Incomplete"],["Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Incomplete"],["Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-1" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]
+  },
+  "group": ["SharedData6d1d86a9"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Complete": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "12", "13", "14", "15", "16"],
+    "Incomplete": ["11", "17", "18", "19"]
+  },
+  "group": ["SharedData6d1d86a9"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Complete": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "12", "13", "14", "15", "16"],
+    "Incomplete": ["11", "17", "18", "19"]
+  },
+  "group": ["SharedData6d1d86a9"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Complete": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "12", "13", "14", "15", "16"],
+    "Incomplete": ["11", "17", "18", "19"]
+  },
+  "group": ["SharedData6d1d86a9"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Complete": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "12", "13", "14", "15", "16"],
+    "Incomplete": ["11", "17", "18", "19"]
+  },
+  "group": ["SharedData6d1d86a9"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-8ddfe153029633303fc7" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8ddfe153029633303fc7">{"x":{"crosstalkOptions":{"key":["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19"],"group":"SharedData6d1d86a9"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-1","21986-2","21986-3","21986-4","21986-7","21986-8","21986-9","21986-10","21986-11","21986-13","21986-15","21986-17","21986-19","21986-20","21986-21","21986-22","21986-24","21986-25","21986-27"],["Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab","Rehab"],["Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Incomplete","Complete","Complete","Complete","Complete","Complete","Incomplete","Incomplete","Incomplete"],["Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Incomplete","Complete","Complete","Complete","Complete","Complete","Incomplete","Incomplete","Incomplete"],["Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Incomplete","Complete","Complete","Complete","Complete","Complete","Incomplete","Incomplete","Incomplete"],["Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Complete","Incomplete","Complete","Complete","Complete","Complete","Complete","Incomplete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="stars-day-hospital" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">STARS Day Hospital</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+2
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+2<br>0<br>1<br>1
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+1<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-2" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2"]
+  },
+  "group": ["SharedData123b790b"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedData123b790b"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Complete": ["1"],
+    "Incomplete": ["2"]
+  },
+  "group": ["SharedData123b790b"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedData123b790b"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedData123b790b"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-cb0333169062b7e52068" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-cb0333169062b7e52068">{"x":{"crosstalkOptions":{"key":["1","2"],"group":"SharedData123b790b"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-5","21986-16"],["Rehab","Rehab"],["Complete","Complete"],["Complete","Incomplete"],["Complete","Complete"],["Complete","Complete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-2" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2"]
+  },
+  "group": ["SharedDatadf3a4749"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Complete": ["1"],
+    "Incomplete": ["2"]
+  },
+  "group": ["SharedDatadf3a4749"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Complete": ["1"],
+    "Incomplete": ["2"]
+  },
+  "group": ["SharedDatadf3a4749"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Complete": ["1"],
+    "Incomplete": ["2"]
+  },
+  "group": ["SharedDatadf3a4749"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Complete": ["1"],
+    "Incomplete": ["2"]
+  },
+  "group": ["SharedDatadf3a4749"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e03192eeb9a952e520c3" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e03192eeb9a952e520c3">{"x":{"crosstalkOptions":{"key":["1","2"],"group":"SharedDatadf3a4749"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-5","21986-16"],["Rehab","Rehab"],["Complete","Incomplete"],["Complete","Incomplete"],["Complete","Incomplete"],["Complete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="redcliffe" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Redcliffe</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+3
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+2
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+3<br>2<br>3<br>3
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+1
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+1<br>1<br>1<br>1
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-3" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2", "3"]
+  },
+  "group": ["SharedData01a756c8"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Complete": ["1", "2", "3"]
+  },
+  "group": ["SharedData01a756c8"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Complete": ["1", "2"],
+    "Incomplete": ["3"]
+  },
+  "group": ["SharedData01a756c8"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Complete": ["1", "2", "3"]
+  },
+  "group": ["SharedData01a756c8"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Complete": ["1", "2", "3"]
+  },
+  "group": ["SharedData01a756c8"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-1c1b7898c18e25a97171" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1c1b7898c18e25a97171">{"x":{"crosstalkOptions":{"key":["1","2","3"],"group":"SharedData01a756c8"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-12","21986-14","21986-26"],["Rehab","Rehab","Rehab"],["Complete","Complete","Complete"],["Complete","Complete","Incomplete"],["Complete","Complete","Complete"],["Complete","Complete","Complete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-3" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2", "3"]
+  },
+  "group": ["SharedData36fb3baf"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Complete": ["1", "2"],
+    "Incomplete": ["3"]
+  },
+  "group": ["SharedData36fb3baf"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Complete": ["1", "2"],
+    "Incomplete": ["3"]
+  },
+  "group": ["SharedData36fb3baf"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Complete": ["1", "2"],
+    "Incomplete": ["3"]
+  },
+  "group": ["SharedData36fb3baf"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Complete": ["1", "2"],
+    "Incomplete": ["3"]
+  },
+  "group": ["SharedData36fb3baf"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-84e562145e07a768bd4b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-84e562145e07a768bd4b">{"x":{"crosstalkOptions":{"key":["1","2","3"],"group":"SharedData36fb3baf"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-12","21986-14","21986-26"],["Rehab","Rehab","Rehab"],["Complete","Complete","Incomplete"],["Complete","Complete","Incomplete"],["Complete","Complete","Incomplete"],["Complete","Complete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="brighton" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Brighton</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+2
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+2
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+2<br>2<br>2<br>2
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+1
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+2<br>1<br>2<br>2
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-4" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2"]
+  },
+  "group": ["SharedDataa86d25a3"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedDataa86d25a3"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedDataa86d25a3"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedDataa86d25a3"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedDataa86d25a3"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-1322eb6da1840759bcae" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1322eb6da1840759bcae">{"x":{"crosstalkOptions":{"key":["1","2"],"group":"SharedDataa86d25a3"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-6","21986-18"],["Rehab","Rehab"],["Complete","Complete"],["Complete","Complete"],["Complete","Complete"],["Complete","Complete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-4" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2"]
+  },
+  "group": ["SharedData066f3005"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedData066f3005"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedData066f3005"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedData066f3005"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Complete": ["1", "2"]
+  },
+  "group": ["SharedData066f3005"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-da0ae2738a964279e832" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-da0ae2738a964279e832">{"x":{"crosstalkOptions":{"key":["1","2"],"group":"SharedData066f3005"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21986-6","21986-18"],["Rehab","Rehab"],["Complete","Complete"],["Complete","Complete"],["Complete","Complete"],["Complete","Complete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="victoria" class="section level2 tabset tabset-fade">
+<h2 class="tabset tabset-fade">Victoria</h2>
+<div id="svhm---acute" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">SVHM - Acute</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+0
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-5" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f5dedeb68b8b7674fd09" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f5dedeb68b8b7674fd09">{"x":{"crosstalkOptions":{"key":[],"group":"SharedData9ddba2f8"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+<div id="post-treatment-data-5" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-379137bdc36aa110fbe8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-379137bdc36aa110fbe8">{"x":{"crosstalkOptions":{"key":[],"group":"SharedDatab8ef8ddf"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="svhm---rehab-fitzroy"
+class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">SVHM - Rehab Fitzroy</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+1
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+1
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+1<br>1<br>1<br>1
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+1
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+1<br>1<br>1<br>1
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-6" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1"]
+  },
+  "group": ["SharedDatae1530296"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Complete": ["1"]
+  },
+  "group": ["SharedDatae1530296"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Complete": ["1"]
+  },
+  "group": ["SharedDatae1530296"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Complete": ["1"]
+  },
+  "group": ["SharedDatae1530296"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Complete": ["1"]
+  },
+  "group": ["SharedDatae1530296"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-aa7cf36e1ec5cbf12095" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-aa7cf36e1ec5cbf12095">{"x":{"crosstalkOptions":{"key":"1","group":"SharedDatae1530296"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21980-1"],["Rehab"],["Complete"],["Complete"],["Complete"],["Complete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-6" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1"]
+  },
+  "group": ["SharedData33303fc7"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Complete": ["1"]
+  },
+  "group": ["SharedData33303fc7"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Complete": ["1"]
+  },
+  "group": ["SharedData33303fc7"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Incomplete": ["1"]
+  },
+  "group": ["SharedData33303fc7"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Complete": ["1"]
+  },
+  "group": ["SharedData33303fc7"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-8c0817a631ab27a2e0f2" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8c0817a631ab27a2e0f2">{"x":{"crosstalkOptions":{"key":"1","group":"SharedData33303fc7"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21980-1"],["Rehab"],["Complete"],["Complete"],["Incomplete"],["Complete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="svhm---rehab-sghs" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">SVHM - Rehab SGHS</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+3
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+2<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-7" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2", "3"]
+  },
+  "group": ["SharedDatacb033316"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Complete": ["1", "2"],
+    "Incomplete": ["3"]
+  },
+  "group": ["SharedDatacb033316"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Complete": ["1", "2"],
+    "Incomplete": ["3"]
+  },
+  "group": ["SharedDatacb033316"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Complete": ["1", "2"],
+    "Incomplete": ["3"]
+  },
+  "group": ["SharedDatacb033316"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Complete": ["1", "2"],
+    "Incomplete": ["3"]
+  },
+  "group": ["SharedDatacb033316"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-3f636b4839c51ee2fcad" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3f636b4839c51ee2fcad">{"x":{"crosstalkOptions":{"key":["1","2","3"],"group":"SharedDatacb033316"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21980-2","21980-3","21980-4"],["Rehab","Rehab","Rehab"],["Complete","Complete","Incomplete"],["Complete","Complete","Incomplete"],["Complete","Complete","Incomplete"],["Complete","Complete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-7" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2", "3"]
+  },
+  "group": ["SharedData9062b7e5"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Complete": ["1"],
+    "Incomplete": ["2", "3"]
+  },
+  "group": ["SharedData9062b7e5"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedData9062b7e5"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedData9062b7e5"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedData9062b7e5"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2095e042145a1a651a7c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2095e042145a1a651a7c">{"x":{"crosstalkOptions":{"key":["1","2","3"],"group":"SharedData9062b7e5"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21980-2","21980-3","21980-4"],["Rehab","Rehab","Rehab"],["Complete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="svhm---rehabhome" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">SVHM - <a href="mailto:Rehab@Home"
+class="email">Rehab@Home</a></h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+0
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-8" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-bae99109ab9d184e3711" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-bae99109ab9d184e3711">{"x":{"crosstalkOptions":{"key":[],"group":"SharedData2068e031"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+<div id="post-treatment-data-8" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-58e602203b9601240044" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-58e602203b9601240044">{"x":{"crosstalkOptions":{"key":[],"group":"SharedData92eeb9a9"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="monash-medical-centre"
+class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Monash Medical Centre</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+7
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-9" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Acute"/>
+<span>Acute</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Acute": ["1", "2", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData52e520c3"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Complete": ["2"],
+    "Incomplete": ["1", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData52e520c3"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData52e520c3"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData52e520c3"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData52e520c3"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4c6fe00e85d2a4eae971" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4c6fe00e85d2a4eae971">{"x":{"crosstalkOptions":{"key":["1","2","3","4","5","6","7"],"group":"SharedData52e520c3"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21988-1","21988-2","21988-3","21988-4","21988-5","21988-6","21988-8"],["Acute","Acute","Acute","Acute","Acute","Acute","Acute"],["Incomplete","Complete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-9" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Acute"/>
+<span>Acute</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Acute": ["1", "2", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData1c1b7898"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData1c1b7898"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData1c1b7898"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData1c1b7898"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Incomplete": ["1", "2", "3", "4", "5", "6", "7"]
+  },
+  "group": ["SharedData1c1b7898"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a21cbb17f6095d254163" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a21cbb17f6095d254163">{"x":{"crosstalkOptions":{"key":["1","2","3","4","5","6","7"],"group":"SharedData1c1b7898"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21988-1","21988-2","21988-3","21988-4","21988-5","21988-6","21988-8"],["Acute","Acute","Acute","Acute","Acute","Acute","Acute"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="kingston-centre" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Kingston Centre</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+5
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+1<br>0<br>1<br>1
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+1
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+1<br>1<br>1<br>1
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-10" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2", "3", "4", "5"]
+  },
+  "group": ["SharedDatac18e25a9"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Complete": ["2", "3"],
+    "Incomplete": ["1", "4", "5"]
+  },
+  "group": ["SharedDatac18e25a9"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Complete": ["2", "3"],
+    "Incomplete": ["1", "4", "5"]
+  },
+  "group": ["SharedDatac18e25a9"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Complete": ["1", "2", "3"],
+    "Incomplete": ["4", "5"]
+  },
+  "group": ["SharedDatac18e25a9"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Complete": ["1", "2", "3"],
+    "Incomplete": ["4", "5"]
+  },
+  "group": ["SharedDatac18e25a9"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e535cdda15c8d8599d12" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e535cdda15c8d8599d12">{"x":{"crosstalkOptions":{"key":["1","2","3","4","5"],"group":"SharedDatac18e25a9"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21988-1","21988-2","21988-3","21988-4","21988-6"],["Rehab","Rehab","Rehab","Rehab","Rehab"],["Incomplete","Complete","Complete","Incomplete","Incomplete"],["Incomplete","Complete","Complete","Incomplete","Incomplete"],["Complete","Complete","Complete","Incomplete","Incomplete"],["Complete","Complete","Complete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-10" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Rehab": ["1", "2", "3", "4", "5"]
+  },
+  "group": ["SharedData717184e5"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Complete": ["2", "3"],
+    "Incomplete": ["1", "4", "5"]
+  },
+  "group": ["SharedData717184e5"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Complete": ["2", "3"],
+    "Incomplete": ["1", "4", "5"]
+  },
+  "group": ["SharedData717184e5"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Complete": ["2", "3"],
+    "Incomplete": ["1", "4", "5"]
+  },
+  "group": ["SharedData717184e5"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Complete": ["2", "3"],
+    "Incomplete": ["1", "4", "5"]
+  },
+  "group": ["SharedData717184e5"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2365c6a4cbb11a7a116d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2365c6a4cbb11a7a116d">{"x":{"crosstalkOptions":{"key":["1","2","3","4","5"],"group":"SharedData717184e5"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21988-1","21988-2","21988-3","21988-4","21988-6"],["Rehab","Rehab","Rehab","Rehab","Rehab"],["Incomplete","Complete","Complete","Incomplete","Incomplete"],["Incomplete","Complete","Complete","Incomplete","Incomplete"],["Incomplete","Complete","Complete","Incomplete","Incomplete"],["Incomplete","Complete","Complete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="casey" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Casey</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+1
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-11" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Acute"/>
+<span>Acute</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Acute": ["1"]
+  },
+  "group": ["SharedData62145e07"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Incomplete": ["1"]
+  },
+  "group": ["SharedData62145e07"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Incomplete": ["1"]
+  },
+  "group": ["SharedData62145e07"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Incomplete": ["1"]
+  },
+  "group": ["SharedData62145e07"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Incomplete": ["1"]
+  },
+  "group": ["SharedData62145e07"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f4244dbce119d45b5705" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f4244dbce119d45b5705">{"x":{"crosstalkOptions":{"key":"1","group":"SharedData62145e07"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21988-7"],["Acute"],["Incomplete"],["Incomplete"],["Incomplete"],["Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-11" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Acute"/>
+<span>Acute</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Acute": ["1"]
+  },
+  "group": ["SharedDataa768bd4b"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Incomplete": ["1"]
+  },
+  "group": ["SharedDataa768bd4b"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Incomplete": ["1"]
+  },
+  "group": ["SharedDataa768bd4b"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Incomplete": ["1"]
+  },
+  "group": ["SharedDataa768bd4b"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Incomplete": ["1"]
+  },
+  "group": ["SharedDataa768bd4b"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e8ed00d828a8371f694e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e8ed00d828a8371f694e">{"x":{"crosstalkOptions":{"key":"1","group":"SharedDataa768bd4b"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21988-7"],["Acute"],["Incomplete"],["Incomplete"],["Incomplete"],["Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="western-australia" class="section level2 tabset tabset-fade">
+<h2 class="tabset tabset-fade">Western Australia</h2>
+<div id="sir-charles-gairdner"
+class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Sir Charles Gairdner</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+0
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-12" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-329a012480e8b55f729f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-329a012480e8b55f729f">{"x":{"crosstalkOptions":{"key":[],"group":"SharedData1322eb6d"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+<div id="post-treatment-data-12" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-cb2cb846850432e747b9" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-cb2cb846850432e747b9">{"x":{"crosstalkOptions":{"key":[],"group":"SharedDataa1840759"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="osborne-park" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Osborne Park</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+0
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-13" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c5d272991b9d9a0bcf67" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c5d272991b9d9a0bcf67">{"x":{"crosstalkOptions":{"key":[],"group":"SharedDatabcaeda0a"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+<div id="post-treatment-data-13" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-de36bbb634952368ff8f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-de36bbb634952368ff8f">{"x":{"crosstalkOptions":{"key":[],"group":"SharedDatae2738a96"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="fiona-stanley" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Fiona Stanley</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+2
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-14" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Acute"/>
+<span>Acute</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Acute": ["1", "3"],
+    "Rehab": ["2"]
+  },
+  "group": ["SharedData4279e832"]
+}</script>
+</div>
+<div id="Baseline WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Complete"/>
+<span>Complete</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline WABR">{
+  "map": {
+    "Complete": ["3"],
+    "Incomplete": ["1", "2"]
+  },
+  "group": ["SharedData4279e832"]
+}</script>
+</div>
+<div id="Baseline Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline Scenario">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedData4279e832"]
+}</script>
+</div>
+<div id="Baseline SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline SAQoL">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedData4279e832"]
+}</script>
+</div>
+<div id="Baseline GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Baseline GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Baseline GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Baseline GHQ">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedData4279e832"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2b3a27c4ad926b8b45d1" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2b3a27c4ad926b8b45d1">{"x":{"crosstalkOptions":{"key":["1","2","3"],"group":"SharedData4279e832"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21984-1","21984-1","21984-2"],["Acute","Rehab","Acute"],["Incomplete","Incomplete","Complete"],["Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+<div id="post-treatment-data-14" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="container-fluid crosstalk-bscols">
+<div class="row">
+<div class="col-xs-2">
+<div id="Arm" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Arm">Arm</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Acute"/>
+<span>Acute</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Arm" value="Rehab"/>
+<span>Rehab</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Arm">{
+  "map": {
+    "Acute": ["1", "3"],
+    "Rehab": ["2"]
+  },
+  "group": ["SharedDataf5dedeb6"]
+}</script>
+</div>
+<div id="Post WABR" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post WABR">WABR</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post WABR" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post WABR">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedDataf5dedeb6"]
+}</script>
+</div>
+<div id="Post Scenario" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post Scenario">Scenario Test</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post Scenario" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post Scenario">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedDataf5dedeb6"]
+}</script>
+</div>
+<div id="Post SAQoL" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post SAQoL">SAQoL</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post SAQoL" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post SAQoL">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedDataf5dedeb6"]
+}</script>
+</div>
+<div id="Post GHQ" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="Post GHQ">GHQ</label>
+<div class="crosstalk-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="Post GHQ" value="Incomplete"/>
+<span>Incomplete</span>
+</label>
+</div>
+</div>
+<script type="application/json" data-for="Post GHQ">{
+  "map": {
+    "Incomplete": ["1", "2", "3"]
+  },
+  "group": ["SharedDataf5dedeb6"]
+}</script>
+</div>
+</div>
+<div class="col-xs-10">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-89f8009285e03a87f578" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-89f8009285e03a87f578">{"x":{"crosstalkOptions":{"key":["1","2","3"],"group":"SharedDataf5dedeb6"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[["21984-1","21984-1","21984-2"],["Acute","Rehab","Acute"],["Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete"],["Incomplete","Incomplete","Incomplete"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="fremantle" class="section level3 tabset tabset-fade">
+<h3 class="tabset tabset-fade">Fremantle</h3>
+<div class="row w-row">
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content1" style="cursor:pointer;">
+<h1 class="number-card-number" style="text-align:left;">
+0
+</h1>
+<div class="number-card-dollars">
+Total Patients
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Pre-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basic-column w-col w-col-3">
+<div class="tag-wrapper">
+<div class="number-card number-card-content4" style="cursor:pointer;">
+<h1 class="number-card-number">
+0
+</h1>
+<div class="number-card-dollars">
+Post-treatment Completed
+</div>
+<div class="number-card-divider">
+
+</div>
+<div class="number-card-progress-wrapper">
+<div class="number-card-front">
+WABR<br>Scenario Test<br>SAQoL<br>GHQ
+</div>
+<div class="number-card-progress">
+0<br>0<br>0<br>0
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<H1>
+Data verification table
+</H1>
+<p>
+‘Complete’ indicates the relevant REDCap record contains data, not
+necessarily that the outcome measure has been administered.
+</p>
+<div id="pre-treatment-data-15" class="section level4">
+<h4>Pre-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-135993f428dfbe8de8c6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-135993f428dfbe8de8c6">{"x":{"crosstalkOptions":{"key":[],"group":"SharedData8b8b7674"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Baseline WABR<\/th>\n      <th>Baseline Scenario<\/th>\n      <th>Baseline SAQoL<\/th>\n      <th>Baseline GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Baseline WABR","targets":2},{"name":"Baseline Scenario","targets":3},{"name":"Baseline SAQoL","targets":4},{"name":"Baseline GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+<div id="post-treatment-data-15" class="section level4">
+<h4>Post-treatment Data</h4>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6ae4de37af05fa1bdb71" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6ae4de37af05fa1bdb71">{"x":{"crosstalkOptions":{"key":[],"group":"SharedDatafd093791"},"filter":"none","vertical":false,"caption":"<caption>Last updated:  20-08-2024<\/caption>","data":[[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Participant ID<\/th>\n      <th>Arm<\/th>\n      <th>Post WABR<\/th>\n      <th>Post Scenario<\/th>\n      <th>Post SAQoL<\/th>\n      <th>Post GHQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});\n}","columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"Participant ID","targets":0},{"name":"Arm","targets":1},{"name":"Post WABR","targets":2},{"name":"Post Scenario","targets":3},{"name":"Post SAQoL","targets":4},{"name":"Post GHQ","targets":5}],"pageLength":25,"lengthMenu":[[25,50,100,-1],["25","50","100","ALL"]],"autoWidth":true,"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

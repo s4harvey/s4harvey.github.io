@@ -1,0 +1,138 @@
+---
+title: "&#32;"
+output:
+  html_document:
+    css: "styles.css"
+    theme: "lumen"
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+# Environment set up
+knitr::opts_chunk$set(echo=FALSE)
+
+library(dplyr)
+library(DT)
+library(crosstalk)
+library(here)
+library(fontawesome)
+
+screening_data <- read.csv(here("Data", "screening_data.csv"))
+patient_data <- read.csv(here("Data", "patient_data.csv"))
+
+screening_data <- screening_data %>% mutate(screen_hospital = ifelse(screen_hospital == 1, "Royal Brisbane and Women's Hospital", ifelse(screen_hospital == 2, "Surgical, Treatment and Rehabilitation Service", ifelse(screen_hospital ==3, "Brighton Rehabilitation Unit", ifelse(screen_hospital == 4, "Caboolture Hospital", ifelse(screen_hospital ==5, "Redcliffe Hospital", ifelse(screen_hospital==6, "St Vincent's Hospital Melbourne - Acute Fitzroy", ifelse(screen_hospital==7, "St Vincent's Hospital Melbourne - Rehab Fitzroy", ifelse(screen_hospital ==8, "St Vincent's Hospital Melbourne - Rehab SGHS", ifelse(screen_hospital==9, "Monash Medical Centre", ifelse(screen_hospital==10, "Kingston Centre", ifelse(screen_hospital ==11, "Sir Charles Gairdner Hospital", ifelse(screen_hospital==12, "Osborne Park Hospital", ifelse(screen_hospital ==13, "Fiona Stanley Hospital",ifelse(screen_hospital==14, "Fremantle Hospital",ifelse(screen_hospital==15, "Casey Hospital",ifelse(screen_hospital==16, "SVHM - Rehab@Home", NA)))))))))))))))))
+
+patient_data <- patient_data %>% mutate(admhospital = ifelse(admhospital == 1, "Royal Brisbane and Women's Hospital", ifelse(admhospital == 2, "Surgical, Treatment and Rehabilitation Service", ifelse(admhospital == 3, "Brighton Rehabilitation Unit", ifelse(admhospital == 4, "Caboolture Hospital", ifelse(admhospital == 5, "Redcliffe Hospital", ifelse(admhospital == 6, "St Vincent's Hospital Melbourne - Acute", ifelse(admhospital == 7, "St Vincent's Hospital Melbourne - Rehab Fitzroy", ifelse(admhospital == 8, "St Vincent's Hospital Melbourne - Rehab SGHS", ifelse(admhospital == 9, "Monash Medical Centre", ifelse(admhospital == 10, "Kingston Centre", ifelse(admhospital == 11, "Sir Charles Gairdner Hospital", ifelse(admhospital == 12, "Osborne Park Hospital", ifelse(admhospital == 13, "Fiona Stanley Hospital",ifelse(admhospital == 14, "Fremantle Hospital",ifelse(admhospital == 15, "STARS Day Hospital",ifelse(admhospital == 16, "Casey Hospital",ifelse(admhospital == 17, "SVHM - Rehab@Home", NA)))))))))))))))))) %>% mutate(redcap_event_name = ifelse(redcap_event_name == "inpatient_acute_arm_1","Acute",ifelse(redcap_event_name == "inpatient_rehabsub_arm_1","Rehab","Community"))) %>% filter(grepl('-',participant_id))
+
+```
+<div style="text-align:right; font-size: 12px; color: gray;">
+  Report generated on `r format(Sys.Date(), "%d %B %Y")`
+</div>
+
+## Issue Data {.tabset .tabset-fade}
+\
+
+### `r fa("circle-exclamation", fill = "#cf3907")` Unlinked Screening IDs
+\
+
+<div style="background-color: #ffffeb; padding: 10px; border-radius: 5px;">
+  <p>Screening IDs that are not linked to the patient's data.</p>
+</div>
+\
+
+```{r, warning=FALSE, echo=FALSE}
+
+nolinked <- subset(screening_data, !(screening_data$screening_id %in% patient_data$screening_id))
+
+nolinked <- nolinked[c("screening_id","screen_dob","screen_hospital","date_screen","date_admit","screen_name")]
+
+colnames(nolinked) <- c("Screening ID", "DOB", "Screening Hospital", "Date Screened", "Date Admitted","Screener")
+
+datatable(nolinked, caption = paste("Last updated: ",format(Sys.Date(), "%d-%m-%Y")), 
+          rownames=FALSE,extensions = "Buttons",
+          options = list(initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});","}"),
+    columnDefs =list(list(className = 'dt-center', targets="_all")), 
+                     pageLength =25 ,dom = 'lfrtBip', buttons = c('csv', 'excel', 'pdf'), 
+                     lengthMenu =list(c(25,50,100,-1), c("25","50","100","ALL")) ,autoWidth = TRUE)) 
+
+```
+
+
+### `r fa("circle-exclamation", fill = "#cf3907")` Missing data
+\
+
+<div style="background-color: #ffffeb; padding: 10px; border-radius: 5px;">
+  <p>Discharge participants with missing data.</p>
+</div>
+\
+
+```{r, warning=FALSE, echo=FALSE}
+
+dispat <- patient_data%>% filter(patient_data$discharge_information_complete ==2 & pt_q_nc___1 ==0 & pt_q_nc___2 ==0)
+
+dispat <- dispat %>% filter(is.na(pt_q1) | is.na(pt_q2) |is.na(pt_q3) |is.na(pt_q4) |is.na(pt_q5)|is.na(pt_q6) |is.na(pt_q7) |is.na(pt_q8))
+
+dispat <- dispat[c("participant_id", "screening_id", "admhospital", "admdate", 
+                           "pt_q1","pt_q2","pt_q3","pt_q4",
+                           "pt_q5","pt_q6","pt_q7","pt_q8")]
+
+datatable(dispat, caption = paste("Last updated: ",format(Sys.Date(), "%d-%m-%Y")), 
+          rownames=FALSE,extensions = "Buttons",
+          options = list(initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});","}"),
+    columnDefs =list(list(className = 'dt-center', targets="_all")), 
+                     pageLength =25 ,dom = 'lfrtBip', buttons = c('csv', 'excel', 'pdf'), 
+                     lengthMenu =list(c(25,50,100,-1), c("25","50","100","ALL")) ,autoWidth = TRUE)) 
+
+```
+
+### `r fa("bell", prefer_type = "solid", fill = "#cf3907")` Incomplete experience survey
+\
+
+<div style="background-color: #ffffeb; padding: 10px; border-radius: 5px;">
+  <p>Incomplete fields in the experience survey.</p>
+</div>
+\
+
+```{r, warning=FALSE, echo=FALSE}
+ex_incom <- patient_data %>% filter(patient_experience_survey_complete ==0) %>% select("participant_id", "admhospital",
+                                                                               "data_entry_id",
+                                                                               "patient_experience_survey_complete")%>%
+  mutate(patient_experience_survey_complete = ifelse(patient_experience_survey_complete == 0,"Incomplete","Complete"))
+colnames(ex_incom) <- c("Participant ID", "Hospital", "Screener","Experience Survey")
+
+datatable(ex_incom, caption = paste("Last updated: ",format(Sys.Date(), "%d-%m-%Y")), 
+          rownames=FALSE,extensions = "Buttons",
+          options = list(initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});","}"),
+    columnDefs =list(list(className = 'dt-center', targets="_all")), 
+                     pageLength =25 ,dom = 'lfrtBip', buttons = c('csv', 'excel', 'pdf'), 
+                     lengthMenu =list(c(25,50,100,-1), c("25","50","100","ALL")) ,autoWidth = TRUE)) 
+
+```
+
+### `r fa("bell", prefer_type = "solid", fill = "#cf3907")` Incomplete end of study
+\
+
+<div style="background-color: #ffffeb; padding: 10px; border-radius: 5px;">
+  <p>Incomplete fields in the end of study.</p>
+</div>
+\
+
+```{r, warning=FALSE, echo=FALSE}
+en_incom <- patient_data %>% filter(end_of_study_complete ==0) %>% select("participant_id", "admhospital",
+                                                                               "data_entry_id",
+                                                                               "end_of_study_complete")%>%
+  mutate(end_of_study_complete = ifelse(end_of_study_complete == 0,"Incomplete","Complete"))
+colnames(en_incom) <- c("Participant ID", "Hospital", "Screener","End Of Study")
+
+datatable(en_incom, caption = paste("Last updated: ",format(Sys.Date(), "%d-%m-%Y")), 
+          rownames=FALSE,extensions = "Buttons",
+          options = list(initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#2266aa', 'color': '#fff'});","}"),
+    columnDefs =list(list(className = 'dt-center', targets="_all")), 
+                     pageLength =25 ,dom = 'lfrtBip', buttons = c('csv', 'excel', 'pdf'), 
+                     lengthMenu =list(c(25,50,100,-1), c("25","50","100","ALL")) ,autoWidth = TRUE)) 
+
+```
