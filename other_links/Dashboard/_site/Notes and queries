@@ -1,6 +1,6 @@
 Dashboard update notes 5/8/24
 
-Index rmd
+Index (Overview)
 
   1. Add summary table - DONE
   
@@ -10,21 +10,33 @@ Index rmd
   
   4. Some sites not tallying accurately: eg. FSH acute/rehab 
   
-  5 Sites section
-   - Remove tablets
-   - add screening ID, QIs, treatment, anchors, exp survey, d/c, end of study as tabs on the verification table
+  5. Chart recruitment by month/site - done
   
-  6 Chart recruitment by month/site
-  
-Clincian.rmd
+Participants
 
-1. Unique participants - done
-1. Unique completed participants, total instruments - done
+  1. Remove duplicate participant ID rows on each tab - 
+  
+  2. Group outcomes by construct - done
+  
+  3. Select appropriate OMI data for each construct - done
+  
+  4. Add change scores for each OMI - done
+  
+  5. Add patient anchor ratings for each construct - done
+  
+  6. Some data missing (eg MN-3,20, Monash-3,4,5,6, FSH-1,2)
+
+Clincians
+
+  1. Unique participants - done
+
+  2. Unique completed participants, total instruments - done
 
 Flags
 
-1. bring to index under sites?
-  
+  1. bring to index under sites? Naaah
+
+
   
 Live data dictionaries
 
